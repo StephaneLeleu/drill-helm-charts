@@ -123,14 +123,14 @@ kubectl port-forward --namespace drilldemo service/drill-service 8047:8047
 ```
 and open your favorite brower using http://localhost:8047
 
-you should see the ![Drill Web UI](docs/images/drillui.png)
+you should see the Drill UI ![Drill Web UI](docs/images/drillui.png)
 
 
 ## Configure the storage
 
 - Go to "storage"
 - click "create" on plugin management
-- Storage name : "demodatalake" (this is the name will use in the queries / the schema name)
+- Storage name : "demodatalake" (this is the name we'll use in the queries / the schema name)
 - Configuration : copy/paste the content of \samples\s3-lake.json
 ```
     {
@@ -149,11 +149,12 @@ you should see the ![Drill Web UI](docs/images/drillui.png)
         "writable": false,
         "defaultInputFormat": null
       }
+      ..............
 ```
 
 remarks:
-- connection : when connecting to S3 using S3a lib, the final endpoint will be <fs.s3a.endpoint>/demodatalake   ( endpoint is set in core-site.xml, ans bucket is specified here)
-- workspaces : this is how we configure folder access in the datalake. Here we have a 'root' (/) and a 'LakeErieFishCom' (/LakeErieFishCom/) workspaces.
+- connection : when connecting to S3 using S3a lib, the final endpoint will be <fs.s3a.endpoint>/demodatalake (the endpoint is set in core-site.xml, and bucket is specified here)
+- workspaces : this is how we configure folder access in the datalake. Here we have a 'root' (/) and 'LakeErieFishCom' (/LakeErieFishCom/) workspaces.
 
 ## testing data access !
 - In Drill Web UI, go to Query (type SQL)
