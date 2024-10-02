@@ -93,9 +93,9 @@ note : we'll use data from : https://www.sciencebase.gov/catalog/item/56951c63e4
 ## Prepare kubernetes
 
 - Create a new namespace
-
+```
 kubectl create ns drilldemo
-
+```
 - create the required configmaps
 ```
 cd ./drill/conf/
@@ -103,11 +103,10 @@ kubectl create configmap drill-config-cm --from-file=drill-override.conf --from-
 kubectl create configmap drill-coresite-cm --from-file=core-site.xml  -n drilldemo
 ```
 - install the helm chart from local files
-
+```
 cd ../..
-
 helm upgrade drill drill/ --set global.namespace=drilldemo --set drill.id=drillcluster1
-
+```
 
 => this will deploy 2 drill-bits and 1 zookeeper quorum (standalone zk)
 ```
@@ -119,9 +118,9 @@ zk-0                       1/1     Running   0          74s
 ```
 
 ## access the Drill-bit UI
-
+```
 kubectl port-forward --namespace drilldemo service/drill-service 8047:8047
-
+```
 and open your favorite brower using http://localhost:8047
 
 you should see the ![Drill Web UI](docs/images/drillui.png)
@@ -174,3 +173,7 @@ SELECT * FROM demodatalake.LakeErieFishCom.`WB_Catch.csv`;
 ![Drill Web UI with results](docs/images/sqlquery.png)
 
 ## Removing ressources:
+```
+ helm uninstall drill 
+ kubectl delete ns drilldemo
+```
