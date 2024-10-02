@@ -75,13 +75,13 @@ All infrastructure components are under SecNumCloud label.
 ## upload datalake test datas
 
 - Connect to this bucket using WinSCP (latest version to ensure compatibility with Cloud-Temple S3)
-  - Hostname : <your bucket url>.s3.fr1.cloud-temple.com
-  - Key ID = <the account Access key>
-  - Secret Key : <the account secret>
+  - Hostname : your bucket url.s3.fr1.cloud-temple.com
+  - Key ID = the account Access key
+  - Secret Key : the account secret
   - Use TLS : YES - implicit
   - in "advanced parameters":
   - "S3" : URL Style : "path"
-  - "folders" : remote folder : /<bucket name>   ( here : /demodatalake  )
+  - "folders" : remote folder : /bucket name   ( here : /demodatalake  )
 
 ![WinSCP Config](docs/images/winscp.png)
 
