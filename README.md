@@ -36,9 +36,9 @@ All infrastructure components are under SecNumCloud label.
 
 - update the S3 credentials in Drill config:
 - Go to /drill/conf/ folder and edit the [core-site.xml] with the S3 parameters
-
-<configuration>
 ```
+<configuration>
+
     <property>
         <name>fs.s3a.access.key</name>
         <value>YOUR ACCESS KEY HERE</value>
