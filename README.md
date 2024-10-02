@@ -38,7 +38,7 @@ All infrastructure components are under SecNumCloud label.
 - Go to /drill/conf/ folder and edit the [core-site.xml] with the S3 parameters
 
 <configuration>
-
+```
     <property>
         <name>fs.s3a.access.key</name>
         <value>YOUR ACCESS KEY HERE</value>
@@ -68,7 +68,7 @@ All infrastructure components are under SecNumCloud label.
       <name>fs.s3a.impl.disable.cache</name>
       <value>true</value>
     </property>
-
+```
 </configuration>
 
 
@@ -97,25 +97,26 @@ note : we'll use data from : https://www.sciencebase.gov/catalog/item/56951c63e4
 kubectl create ns drilldemo
 
 - create the required configmaps
-
+```
 cd ./drill/conf/
 kubectl create configmap drill-config-cm --from-file=drill-override.conf --from-file=drill-env.sh -n drilldemo
 kubectl create configmap drill-coresite-cm --from-file=core-site.xml  -n drilldemo
-
+```
 - install the helm chart from local files
 
 cd ../..
+
 helm upgrade drill drill/ --set global.namespace=drilldemo --set drill.id=drillcluster1
 
 
 => this will deploy 2 drill-bits and 1 zookeeper quorum (standalone zk)
-
+```
 kubectl get pods -n drilldemo
 NAME                       READY   STATUS    RESTARTS   AGE
 drillcluster1-drillbit-0   1/1     Running   0          74s
 drillcluster1-drillbit-1   1/1     Running   0          74s
 zk-0                       1/1     Running   0          74s
-
+```
 
 ## access the Drill-bit UI
 
@@ -132,8 +133,8 @@ you should see the ![Drill Web UI](docs/images/drillui.png)
 - click "create" on plugin management
 - Storage name : "demodatalake" (this is the name will use in the queries / the schema name)
 - Configuration : copy/paste the content of \samples\s3-lake.json
-
-....{
+```
+    {
     "type": "file",
     "enabled": true,
     "connection": "s3a://demodatalake",
@@ -149,7 +150,7 @@ you should see the ![Drill Web UI](docs/images/drillui.png)
         "writable": false,
         "defaultInputFormat": null
       }
-....
+```
 
 remarks:
 - connection : when connecting to S3 using S3a lib, the final endpoint will be <fs.s3a.endpoint>/demodatalake   ( endpoint is set in core-site.xml, ans bucket is specified here)
@@ -158,17 +159,18 @@ remarks:
 ## testing data access !
 - In Drill Web UI, go to Query (type SQL)
 - You can test access to workspaces using:
-
+```
 USE demodatalake.root;
 or
 USE demodatalake.LakeErieFishCom;
-
+```
 you should have "OK" Default schema changed to [demodatalake.lakeeriefishcom]
 
 
 - query the sample csv file:
+```
 SELECT * FROM demodatalake.LakeErieFishCom.`WB_Catch.csv`;
-
+```
 ![Drill Web UI with results](docs/images/sqlquery.png)
 
 ## Removing ressources:
