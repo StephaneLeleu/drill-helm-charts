@@ -97,11 +97,13 @@ note : we'll use data from : https://www.sciencebase.gov/catalog/item/56951c63e4
 kubectl create ns drilldemo
 
 - create the required configmaps
+
 cd ./drill/conf/
 kubectl create configmap drill-config-cm --from-file=drill-override.conf --from-file=drill-env.sh -n drilldemo
 kubectl create configmap drill-coresite-cm --from-file=core-site.xml  -n drilldemo
 
 - install the helm chart from local files
+
 cd ../..
 helm upgrade drill drill/ --set global.namespace=drilldemo --set drill.id=drillcluster1
 
